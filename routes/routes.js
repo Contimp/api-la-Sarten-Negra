@@ -1,12 +1,18 @@
-const express = require('express');
-const { getAllItems, postItem, updateItem, getItem, deleteItem } = require('../controllers/ItemController.js');
+const express = require("express");
+const {
+  getAllItems,
+  postItem,
+  updateItem,
+  getItem,
+  deleteItem,
+} = require("../controllers/ItemController.js");
 
-const itemRoutes = express.Router()
+const itemRoutes = express.Router();
 
-itemRoutes.get('/', getAllItems)
-itemRoutes.get('/:id', getItem)
-itemRoutes.post('/', postItem)
-itemRoutes.put('/:id', updateItem)
-itemRoutes.delete('/:id', deleteItem)
+itemRoutes.get("/:email", getAllItems);
+itemRoutes.get("/:id", getItem);
+itemRoutes.post("/:email", postItem);
+itemRoutes.put("/:id", updateItem);
+itemRoutes.delete("/:id", deleteItem);
 
-module.exports = itemRoutes
+module.exports = itemRoutes;

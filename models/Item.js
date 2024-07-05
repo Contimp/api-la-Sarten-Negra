@@ -1,12 +1,16 @@
-const { DataTypes } = require('sequelize')
+const { DataTypes } = require("sequelize");
 
-const modelItem = sequelize =>{
-  sequelize.define('Item', {
-    name: { type: DataTypes.STRING
+const modelItem = (sequelize) => {
+  sequelize.define(
+    "Item",
+    {
+      plato: { type: DataTypes.STRING },
+      cantidad: { type: DataTypes.INTEGER },
+    },
+    {
+      timestamps: true,
     }
-  }, {
-    timestamps:false
-  })
-}
+  );
+};
 
-module.exports = modelItem
+module.exports = modelItem;
