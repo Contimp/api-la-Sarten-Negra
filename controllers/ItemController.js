@@ -5,9 +5,15 @@ const getAllItems = async (req, res) => {
   const { email } = req.params;
   try {
     const cliente = await customer.findAll({ where: { email: email } });
+    //     const user = customer.findAll({
+    //   where: {email:req.params.email},
+    //   include: [
+    //     { model: modelItem }  ]
+    // })
 
     const item = await Item.findAll({ where: { customerId: cliente[0].id } });
-
+    // const pt = await cliente.getItems(item);
+    // console.log(pt.toJSON());
     console.log(item.map((i) => i.toJSON()));
     console.log(cliente.map((i) => i.toJSON()));
     console.log(cliente[0].id);
@@ -32,13 +38,24 @@ const getItem = async (req, res) => {
 
 // agregar un producto a la orden
 const postItem = async (req, res) => {
-  const { plato, cantidad } = req.body;
+  const {
+    plato,
+    // mesa,
+    cantidad,
+  } = req.body;
 
   try {
     const cliente = await customer.findOne({
       where: { email: req.params.email },
     });
-    const item = await Item.create({ plato, cantidad });
+    const item = await Item.create({
+      plato,
+      // mesa,
+      cantidad,
+    });
+    // console.log(item.toJSON())
+    // console.log(cliente.toJSON())
+    // await cliente.addItem(item)
 
     await item.setCustomer(cliente);
 
@@ -50,10 +67,18 @@ const postItem = async (req, res) => {
 
 // editar un producto de la orden
 const updateItem = async (req, res) => {
-  const { plato, cantidad } = req.body;
+  const {
+    plato,
+    // mesa,
+    cantidad,
+  } = req.body;
   try {
     await Item.update(
-      { plato, cantidad },
+      {
+        plato,
+        // mesa,
+        cantidad,
+      },
       {
         where: { id: req.params.id },
       }
